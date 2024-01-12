@@ -16,7 +16,7 @@ declare(strict_types=1);
 namespace Topvisor\Horde\Text\Diff;
 
 use BadMethodCallException;
-use Horde_Cli;
+use Topvisor\Horde_Cli;
 
 /**
  * "Unified" diff renderer with output coloring.

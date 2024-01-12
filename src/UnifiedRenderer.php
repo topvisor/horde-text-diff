@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Topvisor\Horde\Text\Diff;
 
-use Horde\Text\Diff;
+use Topvisor\Horde\Text\Diff;
 
 /**
  * "Unified" diff renderer.

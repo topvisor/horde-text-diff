@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace Topvisor\Horde\Text\Diff;
-use Horde\Util\Util;
+use Topvisor\Horde\Util\Util;
 
 /**
  * Class used internally by Diff to actually compute the diffs.

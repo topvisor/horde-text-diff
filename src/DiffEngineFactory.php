@@ -31,11 +31,8 @@ class DiffEngineFactory
         array $engineParams = []
     ): DiffEngineInterface
     {
-        $class = '\Horde\Text\Diff\\';
         if ($engineClass == 'auto') {
             $class = extension_loaded('xdiff') ? XdiffEngine::class : NativeEngine::class;
-        } elseif (strpos($engineClass, '_') === false && strpos($engineClass, '\\') === false) {
-            $class .= ucfirst($engineClass);
         } else {
             $class = $engineClass;
         }

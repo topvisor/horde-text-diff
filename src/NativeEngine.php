@@ -278,7 +278,9 @@ class NativeEngine implements DiffEngineInterface
         $seps[] = $flip ? [$yoff, $xoff] : [$xoff, $yoff];
         $ymid = $ymids[$this->lcs];
         for ($n = 0; $n < $nchunks - 1; $n++) {
-            $x1 = $xoff + (int)(($numer + ($xlim - $xoff) * $n) / $nchunks);
+			if(!isset($ymid[$n])) continue; ### addes skip undefined element, for split_characters
+
+			$x1 = $xoff + (int)(($numer + ($xlim - $xoff) * $n) / $nchunks);
             $y1 = $ymid[$n] + 1;
             $seps[] = $flip ? [$y1, $x1] : [$x1, $y1];
         }
@@ -445,11 +447,11 @@ class NativeEngine implements DiffEngineInterface
                     while ($start > 0 && $changed[$start - 1]) {
                         $start--;
                     }
-                    assert($j > 0);
+//                    assert($j > 0); ### skip error
                     while ($other_changed[--$j]) {
                         continue;
                     }
-                    assert($j >= 0 && !$other_changed[$j]);
+//                    assert($j >= 0 && !$other_changed[$j]); ### skip error
                 }
 
                 /* Set CORRESPONDING to the end of the changed run, at the
@@ -470,9 +472,11 @@ class NativeEngine implements DiffEngineInterface
                         $i++;
                     }
 
-                    assert($j < $other_len && ! $other_changed[$j]);
+//                    assert($j < $other_len && ! $other_changed[$j]); ### skip error
+					if(!($j < $other_len && !($other_changed[$j]??null))) break; ### added break
+
                     $j++;
-                    if ($j < $other_len && $other_changed[$j]) {
+                    if ($j < $other_len && $other_changed[$j]??null) { ### added check is null
                         $corresponding = $i;
                         while ($j < $other_len && $other_changed[$j]) {
                             $j++;

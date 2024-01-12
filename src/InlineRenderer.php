@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Topvisor\Horde\Text\Diff;
 
-use Horde\Text\Diff\Diff;
-use Horde\Text\Diff\Renderer;
+use Topvisor\Horde\Text\Diff\Diff;
+use Topvisor\Horde\Text\Diff\Renderer;
 
 /**
  * "Inline" diff renderer.
