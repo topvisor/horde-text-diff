@@ -5,6 +5,13 @@ A text-based diff engine and renderers for multiple diff output formats
 Based on project https://github.com/horde/Text_Diff alpha fork no production version and has been ready to production
 use with support InlineRenderer.
 
+# Why exactly current version lib?
+
+- The most relevant on 2024-01-01
+- Support php 8.3
+- PSR-4
+- Fixed some bugs
+
 # Why Text diff by Horde?
 
 Is the best lib for text diff in php. Is wise and experienced.
@@ -16,7 +23,10 @@ Advantages over analogues:
 - tuning the output format
 - the best speed in php
 - the bets memory optimization in php
-- ready for modern version php
+
+# Optimiztions
+
+For very long strings, there is a trick: divide long strings before use diff
 
 ```php
 use Topvisor\Horde\Text\Diff;
