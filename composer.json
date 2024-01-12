@@ -3,6 +3,7 @@
   "name": "topvisor/horde-text-diff",
   "description": "Text diff generation and rendering library",
   "type": "library",
+  "license": "LGPL-2.1-only",
   "homepage": "https://github.com/topvisor/horde-text-diff",
   "require": {
     "php": "^8.2"
