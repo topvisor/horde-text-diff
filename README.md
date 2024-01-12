@@ -28,6 +28,8 @@ Advantages over analogues:
 
 For very long strings, there is a trick: divide long strings before use diff
 
+# Examples
+
 ```php
 use Topvisor\Horde\Text\Diff;
 
