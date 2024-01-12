@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Horde\Text\Diff;
+namespace Topvisor\Horde\Text\Diff;
 
 use Horde\Text\Diff\Diff;
 use Horde\Text\Diff\Renderer;

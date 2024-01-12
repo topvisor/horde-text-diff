@@ -1,0 +1,15 @@
+{
+  "minimum-stability": "dev",
+  "name": "topvisor/horde-text-diff",
+  "description": "Text diff generation and rendering library",
+  "type": "library",
+  "homepage": "https://github.com/topvisor/horde-text-diff",
+  "require": {
+    "php": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Topvisor\\Horde\\Text\\Diff\\": "src/"
+    }
+  }
+}

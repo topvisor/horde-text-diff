@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Horde\Text\Diff;
+namespace Topvisor\Horde\Text\Diff;
 
 /**
  * Class used internally by Horde_Text_Diff to actually compute the diffs.

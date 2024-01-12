@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @package  Text_Diff
  */
 
-namespace Horde\Text\Diff;
+namespace Topvisor\Horde\Text\Diff;
 
 use BadMethodCallException;
 use Horde_Cli;

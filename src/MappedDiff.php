@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @package  Text_Diff
  */
 
-namespace Horde\Text\Diff;
+namespace Topvisor\Horde\Text\Diff;
 
 /**
  * This can be used to compute things like case-insensitve diffs, or diffs

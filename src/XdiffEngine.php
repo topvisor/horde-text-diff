@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Horde\Text\Diff;
+namespace Topvisor\Horde\Text\Diff;
 use function xdiff_string_diff;
 /**
  * Class used internally by Diff to actually compute the diffs.

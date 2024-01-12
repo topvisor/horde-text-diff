@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Horde\Text\Diff;
+namespace Topvisor\Horde\Text\Diff;
 
 /**
  * "Context" diff renderer.

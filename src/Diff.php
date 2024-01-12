@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Horde\Text\Diff;
+namespace Topvisor\Horde\Text\Diff;
 /**
  * General API for generating and formatting diffs - the differences between
  * two sequences of strings.

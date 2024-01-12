@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Horde\Text\Diff;
-
-use Horde_Exception_Wrapped;
+namespace Topvisor\Horde\Text\Diff;
 
 /**
  * Exception handler for the Text_Diff package.
@@ -19,6 +17,6 @@ use Horde_Exception_Wrapped;
  * @license  http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package  Text_Diff
  */
-class Exception extends Horde_Exception_Wrapped
+class Exception extends \Exception
 {
 }
