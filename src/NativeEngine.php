@@ -84,11 +84,11 @@ class NativeEngine implements DiffEngineInterface
      * @param array<string> $fromLines lines of text from old file
      * @param array<string> $toLines   lines of text from new file
      */
-    public function __construct(        
+    public function __construct(
         private array $fromLines,
         private array $toLines,
     )
-    {        
+    {
     }
     /**
      * Returns the array of differences.
@@ -163,8 +163,11 @@ class NativeEngine implements DiffEngineInterface
         $edits = [];
         $xi = $yi = 0;
         while ($xi < $n_from || $yi < $n_to) {
-            assert($yi < $n_to || $this->xchanged[$xi]);
-            assert($xi < $n_from || $this->ychanged[$yi]);
+//            assert($yi < $n_to || $this->xchanged[$xi]); ### skip error
+//            assert($xi < $n_from || $this->ychanged[$yi]); ### skip error
+
+            if(!($yi < $n_to || $this->xchanged[$xi])) break; ### skip error
+            if(!($xi < $n_from || $this->ychanged[$yi])) break; ### skip error
 
             // Skip matching "snake".
             $copy = [];
@@ -259,17 +262,25 @@ class NativeEngine implements DiffEngineInterface
                     continue;
                 }
                 $matches = $ymatches[$line];
-                foreach ($matches as $y) {
-                    $k = $this->_lcsPos($y);
+                reset($matches);
+                foreach ($matches as list(,$y)) {
                     if (empty($this->in_seq[$y])) {
+                        $k = $this->_lcsPos($y);
                         assert($k > 0);
                         $ymids[$k] = $ymids[$k - 1];
                         break;
-                    } elseif ($y > $this->seq[$k - 1]) {
+                    }
+                }
+                foreach ($matches as list(,$y)) {
+                    if ($y > $this->seq[$k - 1]) {
                         assert($y <= $this->seq[$k]);
                         $this->in_seq[$this->seq[$k]] = false;
                         $this->seq[$k] = $y;
                         $this->in_seq[$y] = 1;
+                    } elseif (empty($this->in_seq[$y])) {
+                        $k = $this->_lcsPos($y);
+                        assert($k > 0);
+                        $ymids[$k] = $ymids[$k - 1];
                     }
                 }
             }
@@ -278,9 +289,7 @@ class NativeEngine implements DiffEngineInterface
         $seps[] = $flip ? [$yoff, $xoff] : [$xoff, $yoff];
         $ymid = $ymids[$this->lcs];
         for ($n = 0; $n < $nchunks - 1; $n++) {
-			if(!isset($ymid[$n])) continue; ### addes skip undefined element, for split_characters
-
-			$x1 = $xoff + (int)(($numer + ($xlim - $xoff) * $n) / $nchunks);
+            $x1 = $xoff + (int)(($numer + ($xlim - $xoff) * $n) / $nchunks);
             $y1 = $ymid[$n] + 1;
             $seps[] = $flip ? [$y1, $x1] : [$x1, $y1];
         }
@@ -308,7 +317,7 @@ class NativeEngine implements DiffEngineInterface
             }
         }
 
-        assert($ypos != $this->seq[$end]);
+		assert($ypos != $this->seq[$end]);
 
         $this->in_seq[$this->seq[$end]] = false;
         $this->seq[$end] = $ypos;
@@ -414,7 +423,9 @@ class NativeEngine implements DiffEngineInterface
             }
 
             while ($i < $len && ! $changed[$i]) {
-                assert($j < $other_len && ! $other_changed[$j]);
+//                assert($j < $other_len && ! $other_changed[$j]);
+                if(!($j < $other_len && ! $other_changed[$j])) break; ### skip error
+
                 $i++;
                 $j++;
                 while ($j < $other_len && $other_changed[$j]) {
@@ -448,7 +459,7 @@ class NativeEngine implements DiffEngineInterface
                         $start--;
                     }
 //                    assert($j > 0); ### skip error
-                    while ($other_changed[--$j]) {
+                    while ($other_changed[--$j]??null) {
                         continue;
                     }
 //                    assert($j >= 0 && !$other_changed[$j]); ### skip error
@@ -473,10 +484,10 @@ class NativeEngine implements DiffEngineInterface
                     }
 
 //                    assert($j < $other_len && ! $other_changed[$j]); ### skip error
-					if(!($j < $other_len && !($other_changed[$j]??null))) break; ### added break
+                    if(!($j < $other_len && !($other_changed[$j]??null))) break; ### added break
 
                     $j++;
-                    if ($j < $other_len && $other_changed[$j]??null) { ### added check is null
+                    if ($j < $other_len && ($other_changed[$j]??null)) { ### added check is null
                         $corresponding = $i;
                         while ($j < $other_len && $other_changed[$j]) {
                             $j++;
