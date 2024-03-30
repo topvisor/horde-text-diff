@@ -87,6 +87,7 @@ class NativeEngine implements DiffEngineInterface
     public function __construct(
         private array $fromLines,
         private array $toLines,
+		private ?Renderer $renderer = null
     )
     {
     }
@@ -257,6 +258,8 @@ class NativeEngine implements DiffEngineInterface
 
             $x1 = $xoff + (int)(($numer + ($xlim - $xoff) * $chunk) / $nchunks);
             for (; $x < $x1; $x++) {
+				$this->renderer?->checkTimeout();
+
                 $line = $flip ? $this->yv[$x] : $this->xv[$x];
                 if (empty($ymatches[$line])) {
                     continue;

@@ -49,10 +49,11 @@ class Diff
         array $fromLines = [],
         array $toLines = [],
         string $engineClass = 'auto',
-        array $engineParams = []
+        array $engineParams = [],
+		Renderer $renderer = null
     ): Diff
     {
-        $engine = DiffEngineFactory::fromFileLineArrays($fromLines, $toLines, $engineClass, $engineParams);
+        $engine = DiffEngineFactory::fromFileLineArrays($fromLines, $toLines, $engineClass, $engineParams, $renderer);
         return new self($engine->diff());
     }
    /**

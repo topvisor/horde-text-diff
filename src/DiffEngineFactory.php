@@ -28,7 +28,8 @@ class DiffEngineFactory
         array $fromLines = [],
         array $toLines = [],
         string $engineClass = 'auto',
-        array $engineParams = []
+        array $engineParams = [],
+		Renderer $renderer = null
     ): DiffEngineInterface
     {
         if ($engineClass == 'auto') {
@@ -36,7 +37,7 @@ class DiffEngineFactory
         } else {
             $class = $engineClass;
         }
-        $engine = new $class($fromLines, $toLines);
+        $engine = new $class($fromLines, $toLines, $renderer);
         return $engine;
     }
 

@@ -33,13 +33,18 @@ class Renderer
      * This should be left at zero for this class, but subclasses may want to
      * set this to other values.
      */
-    protected $_trailing_context_lines = 0;
+	protected $_trailing_context_lines = 0;
+
+	protected $_timeout = 0;
+	protected $_time_start;
 
     /**
      * Constructor.
      */
-    public function __construct($params = [])
+    public function __construct($params = [], $time_start = null)
     {
+		$this->_time_start = $time_start ?? time();
+
         foreach ($params as $param => $value) {
             $v = '_' . $param;
             if (isset($this->$v)) {
@@ -47,6 +52,12 @@ class Renderer
             }
         }
     }
+
+	public function checkTimeout(){
+		if(!$this->_timeout) return;
+
+		if(time() - $this->_time_start > $this->_timeout) throw new Exception('Timeout');
+	}
 
     /**
      * Get any renderer parameters.
